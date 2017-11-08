@@ -1,0 +1,474 @@
+<config-template xmlns="http://tail-f.com/ns/config/1.0"
+                 servicepoint="nso-qos-no-python">
+  <devices xmlns="http://tail-f.com/ns/ncs">
+    <device>
+      <!--
+          Select the devices from some data structure in the service
+          model. In this skeleton the devices are specified in a leaf-list.
+          Select all devices in that leaf-list:
+      -->
+      <name>{/device}</name>
+      <config>
+        <!--
+            Add device-specific parameters here.
+            In this skeleton the service has a leaf "dummy"; use that
+            to set something on the device e.g.:
+            <ip-address-on-device>{/dummy}</ip-address-on-device>
+        -->
+
+        <!--
+                          Qos version 2.3.2 for 4510 devices
+                        -->
+                        <ip xmlns="urn:ios">
+                          <access-list>
+                            <extended>
+                              <ext-named-acl>
+                                <name>qos-medium-priority</name>
+                                <ext-access-list-rule>
+                                  <rule>remark Placeholder for future use</rule>
+                                </ext-access-list-rule>
+                              </ext-named-acl>
+                              <ext-named-acl>
+                                <name>qos-scavenger</name>
+                                <ext-access-list-rule>
+                                  <rule>remark Traffic to be classify into scavenger</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>remark SnapMirror Backup from remote DC to Hub location</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit tcp any range 10565 10569 any</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>remark SnapMirror Restore from remote DC to Hub location</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit tcp any any range 10565 10569</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>remark SnapVault Restore from remote DC to Hub location</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit tcp any any range 11104 11105</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>remark SnapVault Backup from remote DC to Hub location</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit tcp any range 11104 11105 any</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>remark PC Backup</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit tcp any any eq 16384</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>remark Crash-Plan-PC-Backup</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit tcp any any eq 4282</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>remark Crash-Plan-PC-Restore</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit tcp any eq 4282 any</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>remark Beyond App Migration</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit tcp any eq 49221 any</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>remark Avamar</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit tcp any eq 27000 any eq 27000</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>remark Rsync over SSH</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit tcp any any eq 873</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>remark DD/ART, SCP, SFTP over SSH</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit tcp any any eq 2222</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>remark CDP &amp; Recover Point</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit tcp any any eq 5040</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>remark FCios:ip &amp; SRDF/A</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit tcp any any eq 3225</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>remark Celerra Replicator</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit tcp any any eq 8888</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>remark NMSP Traffic from WLC to MSE</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit tcp any any eq 16113</rule>
+                                </ext-access-list-rule>
+                              </ext-named-acl>
+                              <ext-named-acl>
+                                <name>qos-signalling</name>
+                                <ext-access-list-rule>
+                                  <rule>remark Traffic to be classify into signalling</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>remark Skinny</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit tcp any any range 2000 2001</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>remark Gatekeeper RAS, Q.931 and H.245 call set up</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit udp any any eq 1719</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit tcp any any eq 1720</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit tcp any any range 5555 5560</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>remark H.245</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>remark SIP</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit tcp any any range 5060 5061</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit udp any any range 5060 5061</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>remark RADIUS for EAP</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit udp any any range 1645 1646</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit udp any any range 1812 1813</rule>
+                                </ext-access-list-rule>
+                              </ext-named-acl>
+                              <ext-named-acl>
+                                <name>qos-video-af41</name>
+                                <ext-access-list-rule>
+                                  <rule>remark Traffic to be classified as AF41</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>remark Tandberg endpoints</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit udp any range 2326 2485 any dscp 35</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit udp any range 46000 49000 any dscp 35</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>remark Spark client and endpoint to cloud or HMN</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit udp any range 52100 52299 any eq 5004 </rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>remark Spark call endpoint to collaboration cloud</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit udp any range 52200 52299 any eq 3478</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>remark Spark Catch-all - to be removed once all Spark devices use the defined ports</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit udp any any eq 3478</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit udp any any eq 5004</rule>
+                                </ext-access-list-rule>
+                              </ext-named-acl>
+                              <ext-named-acl>
+                                <name>qos-video-af42</name>
+                                <ext-access-list-rule>
+                                  <rule>remark Traffic to be classified as AF42</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>remark Tandberg endpoints</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit udp any range 2326 2485 any dscp 37</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit udp any range 46000 49000 any dscp 37</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>remark CUVA</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit udp any any eq 5445</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>remark Tandberg Movi</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit udp any range 14040 14240 any</rule>
+                                </ext-access-list-rule>
+                              </ext-named-acl>
+                              <ext-named-acl>
+                                <name>qos-video-cs4</name>
+                                <ext-access-list-rule>
+                                  <rule>remark Traffic to be classified as CS4</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>remark Tandberg endpoints</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit udp any range 2326 2485 any dscp 33</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit udp any range 46000 49000 any dscp 33</rule>
+                                </ext-access-list-rule>
+                              </ext-named-acl>
+                              <ext-named-acl>
+                                <name>qos-voice-bearer</name>
+                                <ext-access-list-rule>
+                                  <rule>remark Traffic to be classify into voice-bearer</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>remark ios:ip Communicator</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit udp any range 24576 32767 any</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>remark Spark client and endpoint to cloud or HMN</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit udp any range 52000 52099 any eq 5004 </rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>remark Spark call endpoint to collaboration cloud</rule>
+                                </ext-access-list-rule>
+                                <ext-access-list-rule>
+                                  <rule>permit udp any range 52050 52099 any eq 3478</rule>
+                                </ext-access-list-rule>
+                              </ext-named-acl>
+                            </extended>
+                          </access-list>
+                        </ip>
+                        <class-map xmlns="urn:ios">
+                          <name>match-everything</name>
+                          <prematch>match-all</prematch>
+                          <match>
+                            <access-group>
+                              <name>trust-all</name>
+                            </access-group>
+                          </match>
+                        </class-map>
+                        <class-map xmlns="urn:ios">
+                          <name>medium-priority</name>
+                          <prematch>match-all</prematch>
+                          <match>
+                            <access-group>
+                              <name>qos-medium-priority</name>
+                            </access-group>
+                          </match>
+                        </class-map>
+                        <class-map xmlns="urn:ios">
+                          <name>scavenger</name>
+                          <prematch>match-all</prematch>
+                          <match>
+                            <access-group>
+                              <name>qos-scavenger</name>
+                            </access-group>
+                          </match>
+                        </class-map>
+                        <class-map xmlns="urn:ios">
+                          <name>signalling</name>
+                          <prematch>match-all</prematch>
+                          <match>
+                            <access-group>
+                              <name>qos-signalling</name>
+                            </access-group>
+                          </match>
+                        </class-map>
+                        <class-map xmlns="urn:ios">
+                          <name>video-af41</name>
+                          <prematch>match-all</prematch>
+                          <match>
+                            <access-group>
+                              <name>qos-video-af41</name>
+                            </access-group>
+                          </match>
+                        </class-map>
+                        <class-map xmlns="urn:ios">
+                          <name>video-af42</name>
+                          <prematch>match-all</prematch>
+                          <match>
+                            <access-group>
+                              <name>qos-video-af42</name>
+                            </access-group>
+                          </match>
+                        </class-map>
+                        <class-map xmlns="urn:ios">
+                          <name>video-bearer</name>
+                          <prematch>match-all</prematch>
+                          <match>
+                            <access-group>
+                              <name>qos-video-bearer</name>
+                            </access-group>
+                          </match>
+                        </class-map>
+                        <class-map xmlns="urn:ios">
+                          <name>video-cs4</name>
+                          <prematch>match-all</prematch>
+                          <match>
+                            <access-group>
+                              <name>qos-video-cs4</name>
+                            </access-group>
+                          </match>
+                        </class-map>
+                        <class-map xmlns="urn:ios">
+                          <name>voice-bearer</name>
+                          <prematch>match-all</prematch>
+                          <match>
+                            <access-group>
+                              <name>qos-voice-bearer</name>
+                            </access-group>
+                          </match>
+                        </class-map>
+                        <policy-map xmlns="urn:ios">
+                          <name>classify</name>
+                          <description>QoS 2.3.2-</description>
+                          <class>
+                            <name>qos-scavenger</name>
+                            <set>
+                              <dscp>
+                                <value>8</value>
+                              </dscp>
+                            </set>
+                          </class>
+                          <class>
+                            <name>qos-medium-priority</name>
+                            <set>
+                              <dscp>
+                                <value>16</value>
+                              </dscp>
+                            </set>
+                          </class>
+                          <class>
+                            <name>qos-signalling</name>
+                            <set>
+                              <dscp>
+                                <value>24</value>
+                              </dscp>
+                            </set>
+                          </class>
+                          <class>
+                            <name>qos-video-cs4</name>
+                            <set>
+                              <dscp>
+                                <value>cs4</value>
+                              </dscp>
+                            </set>
+                          </class>
+                          <class>
+                            <name>qos-video-af41</name>
+                            <set>
+                              <dscp>
+                                <value>af41</value>
+                              </dscp>
+                            </set>
+                          </class>
+                          <class>
+                            <name>qos-video-af42</name>
+                            <set>
+                              <dscp>
+                                <value>af42</value>
+                              </dscp>
+                            </set>
+                          </class>
+                          <class>
+                            <name>qos-voice-bearer</name>
+                            <set>
+                              <dscp>
+                                <value>46</value>
+                              </dscp>
+                            </set>
+                          </class>
+                        </policy-map>
+                        <policy-map xmlns="urn:ios">
+                          <name>untrusted</name>
+                          <class-default>
+                            <class>
+                              <name>class-default</name>
+                              <set>
+                                <dscp>
+                                  <value>default</value>
+                                </dscp>
+                              </set>
+                            </class>
+                          </class-default>
+                        </policy-map>
+                        <vlan xmlns="urn:ios">
+                          <configuration>
+                            <id>10</id>
+                            <service-policy>
+                              <input>classify</input>
+                            </service-policy>
+                          </configuration>
+                          <configuration>
+                            <id>240</id>
+                            <service-policy>
+                              <input>untrusted</input>
+                            </service-policy>
+                          </configuration>
+                          <configuration>
+                            <id>300</id>
+                            <service-policy>
+                              <input>classify</input>
+                            </service-policy>
+                          </configuration>
+                          <configuration>
+                            <id>550</id>
+                            <service-policy>
+                              <input>untrusted</input>
+                            </service-policy>
+                          </configuration>
+                        </vlan>
+                        <interface xmlns="urn:ios">
+                          <GigabitEthernet>
+                            <name>1/1</name>
+                            <service-policy>
+                              <input>TRUST-MARKING</input>
+                            </service-policy>
+                          </GigabitEthernet>
+                          <GigabitEthernet>
+                            <name>2/1</name>
+                            <service-policy>
+                              <input>TRUST-MARKING</input>
+                            </service-policy>
+                          </GigabitEthernet>
+                        </interface>
+      </config>
+    </device>
+  </devices>
+</config-template>

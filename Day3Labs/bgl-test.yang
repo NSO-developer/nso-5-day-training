@@ -1,0 +1,10 @@
+module bgl-test {
+  namespace "http://com/example/bgltest";
+  prefix bgl-test;
+
+  container my_tab_around_this{
+    leaf a_yang_input {
+      type string;
+    }
+  }
+}

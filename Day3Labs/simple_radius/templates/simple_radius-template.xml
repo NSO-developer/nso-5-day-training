@@ -1,0 +1,33 @@
+<config-template xmlns="http://tail-f.com/ns/config/1.0"
+                 servicepoint="simple_radius">
+  <devices xmlns="http://tail-f.com/ns/ncs">
+    <device>
+      <!--
+          Select the devices from some data structure in the service
+          model. In this skeleton the devices are specified in a leaf-list.
+          Select all devices in that leaf-list:
+      -->
+      <name>{/device}</name>
+      <config>
+        <!--
+            Add device-specific parameters here.
+            In this skeleton the service has a leaf "dummy"; use that
+            to set something on the device e.g.:
+            <ip-address-on-device>{/dummy}</ip-address-on-device>
+        -->
+        <radius xmlns="urn:ios">
+          <server>
+            <id>one</id>
+            <address>
+              <ipv4>
+                <host>{/radius_server_ip}</host>
+                <auth-port>1812</auth-port>
+                <acct-port>1813</acct-port>
+              </ipv4>
+            </address>
+          </server>
+        </radius>
+      </config>
+    </device>
+  </devices>
+</config-template>

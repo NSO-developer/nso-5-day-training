@@ -1,0 +1,55 @@
+module acl_lab {
+  namespace "http://com/example/acl_lab";
+  prefix acl_lab;
+
+  import ietf-inet-types {
+    prefix inet;
+  }
+  import tailf-ncs {
+    prefix ncs;
+  }
+
+  augment /ncs:services {
+  list acl_lab {
+    key "ACL_Name ACL_Direction";
+
+    leaf ACL_Name {
+      type string;
+    }
+
+    leaf ACL_Direction {
+      type enumeration{
+        enum "in";
+        enum "out";
+      }
+    }
+
+    list devices {
+      key device_name;
+
+      leaf device_name {
+        type leafref {
+          path "/ncs:devices/ncs:device/ncs:name";
+        }
+      }
+      list interfaces {
+        key "interface_type interface_number";
+
+        leaf interface_type {
+          type enumeration{
+            enum "FastEthernet";
+            enum "GigabitEthernet";
+            enum "TenGigEthernet";
+            enum "Tunnel";
+          }
+        }
+
+        leaf interface_number {
+          type string;
+        }
+      }
+    }
+
+  }
+  } // augment /ncs:services {
+}

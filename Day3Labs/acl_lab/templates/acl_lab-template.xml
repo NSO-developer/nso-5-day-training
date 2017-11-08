@@ -1,0 +1,50 @@
+<config-template xmlns="http://tail-f.com/ns/config/1.0"
+                 servicepoint="acl_lab">
+  <devices xmlns="http://tail-f.com/ns/ncs">
+    <device foreach="{/devices}">
+      <name>{device_name}</name>
+      <config>
+        <interface xmlns="urn:ios" foreach="{interfaces}" >
+          <FastEthernet when="{interface_type='FastEthernet'}">
+            <name>{interface_number}</name>
+            <ip>
+              <access-group tags="merge">
+                  <direction>{/ACL_Direction}</direction>
+                  <access-list>{/ACL_Name}</access-list>
+              </access-group>
+            </ip>
+          </FastEthernet>
+          <GigabitEthernet when="{interface_type='GigabitEthernet'}">
+            <name>{interface_number}</name>
+            <ip>
+              <access-group tags="merge">
+                  <direction>{/ACL_Direction}</direction>
+                  <access-list>{/ACL_Name}</access-list>
+              </access-group>
+            </ip>
+          </GigabitEthernet>
+
+          <TenGigabitEthernet when="{interface_type='TenGigabitEthernet'}">
+            <name>{interface_number}</name>
+            <ip>
+              <access-group tags="merge">
+                  <direction>{/ACL_Direction}</direction>
+                  <access-list>{/ACL_Name}</access-list>
+              </access-group>
+            </ip>
+          </TenGigabitEthernet>
+
+          <Tunnel when="{interface_type='Tunnel'}">
+            <name>{interface_number}</name>
+            <ip>
+              <access-group tags="merge">
+                  <direction>{/ACL_Direction}</direction>
+                  <access-list>{/ACL_Name}</access-list>
+              </access-group>
+            </ip>
+          </Tunnel>
+        </interface>
+      </config>
+    </device>
+  </devices>
+</config-template>

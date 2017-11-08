@@ -1,0 +1,34 @@
+module simple_radius {
+  namespace "http://com/example/simple_radius";
+  prefix simple_radius;
+
+  import ietf-inet-types {
+    prefix inet;
+  }
+  import tailf-ncs {
+    prefix ncs;
+  }
+
+  augment /ncs:services {
+  list simple_radius {
+    key radius_server_ip;
+
+    uses ncs:service-data;
+    ncs:servicepoint "simple_radius";
+
+    leaf radius_server_ip {
+      type inet:ipv4-address;
+    }
+
+    // may replace this with other ways of refering to the devices.
+    leaf-list device {
+      type leafref {
+        path "/ncs:devices/ncs:device/ncs:name";
+      }
+    }
+
+    // replace with your own stuff here
+
+  }
+  } // augment /ncs:services {
+}

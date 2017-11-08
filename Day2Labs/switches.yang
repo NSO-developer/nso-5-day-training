@@ -1,0 +1,80 @@
+module switches {
+  namespace "http://example.com/switches";
+  prefix "switches";
+
+  organization "Cisco Systems";
+  contact "branblac@cisco.com";
+  description "Module to Model switches. Lab for Cisco System IT NSO Training.";
+  revision 2017-10-01 {
+    description
+      "Initial revision.";
+    reference
+      "RFC 7317: A YANG Data Model for System Management";
+  }
+
+    list Switches {
+      key Model_Number;
+      description "Model that repersents generic switches across manufacturers";
+
+      leaf Manufacturer {
+        type enumeration {
+          enum 'Cisco' {
+              description "Cisco Systems, cisco.com";
+          }
+          enum 'Juniper' {
+              description "Juniper Networks, juniper.com";
+          }
+          enum 'Arista' {
+              description "Arista Networks, arista.com";
+          }
+          enum 'HP' {
+              description "Hewlitt Packard, hp.com";
+          }
+        }
+        description "Manufacturer of the switch";
+      }
+
+      leaf Model_Number {
+        type string;
+        description "The PID or unique product identifier for the model";
+      }
+
+      leaf Platform_Series {
+        type string;
+        description "The model series that the PID belongs to. For example a 3850 would belong to the 3800 series switches";
+      }
+
+      list Interfaces {
+        key Interface_Type;
+        description "List of Interface Type adn number of interfaces available of that type";
+
+        leaf Interface_Type {
+          type enumeration {
+            enum 'FastEthernet' {
+              description "For FastEthernet interfaces";
+            }
+            enum 'GigabitEthernet'{
+              description "For GigabitEthernet interfaces";
+            }
+            enum 'TenGigEthernet' {
+              description "For TenGigEthernet interfaces";
+            }
+          }
+          description "The physical type of interface. ie Fe, Ge, TeG, etc..";
+        }
+
+        leaf Number_of_Interfaces {
+          type int64 {
+          range "0 .. 48";
+          }
+          description "The number of interfaces of the provided type that the switch has.";
+        }
+      }
+
+      leaf MSRP {
+        type int64;
+        description "The Manufacturer Specified Retail Price of the switch in (currency of choice)";
+      }
+
+    }
+}

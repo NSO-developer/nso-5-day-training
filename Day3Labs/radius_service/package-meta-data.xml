@@ -1,0 +1,10 @@
+<ncs-package xmlns="http://tail-f.com/ns/ncs-packages">
+  <name>radius_service</name>
+  <package-version>1.0</package-version>
+  <description>Template-based radius_service resource facing service</description>
+  <ncs-min-version>4.4</ncs-min-version>
+
+  <!-- It's possible to add more components to the -->
+  <!-- same package, multiple services, data providers etc -->
+
+</ncs-package>
